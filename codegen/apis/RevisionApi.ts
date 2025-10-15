@@ -22,6 +22,7 @@ import type {
   Promptroles,
   Requisites,
   Revision,
+  RevisionTagSpecifier,
 } from '../models/index';
 import {
     CompressionFromJSON,
@@ -38,6 +39,8 @@ import {
     RequisitesToJSON,
     RevisionFromJSON,
     RevisionToJSON,
+    RevisionTagSpecifierFromJSON,
+    RevisionTagSpecifierToJSON,
 } from '../models/index';
 
 export interface GetRevisionRequest {
@@ -55,7 +58,7 @@ export interface ReviseDocumentsRequest {
     comparisons?: string | null;
     projections?: string | null;
     promptroles?: Promptroles | null;
-    tags?: string | null;
+    tags?: RevisionTagSpecifier | null;
     multimodal?: Multimodal | null;
     compression?: Compression | null;
 }
@@ -218,8 +221,8 @@ export class RevisionApi extends runtime.BaseAPI {
                     }
 
         if (requestParameters['tags'] != null) {
-            formParams.append('tags', requestParameters['tags'] as any);
-        }
+            formParams.append('tags', new Blob([JSON.stringify(RevisionTagSpecifierToJSON(requestParameters['tags']))], { type: "application/json", }));
+                    }
 
         if (requestParameters['multimodal'] != null) {
             formParams.append('multimodal', new Blob([JSON.stringify(MultimodalToJSON(requestParameters['multimodal']))], { type: "application/json", }));

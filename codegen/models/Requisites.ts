@@ -13,12 +13,44 @@
  */
 
 import { mapValues } from '../runtime';
+import type { RequisiteSpecifier } from './RequisiteSpecifier';
+import {
+    RequisiteSpecifierFromJSON,
+    RequisiteSpecifierFromJSONTyped,
+    RequisiteSpecifierToJSON,
+    RequisiteSpecifierToJSONTyped,
+} from './RequisiteSpecifier';
+
 /**
  * 
  * @export
  * @interface Requisites
  */
 export interface Requisites {
+    /**
+     * 
+     * @type {{ [key: string]: Array<string>; }}
+     * @memberof Requisites
+     */
+    byIndex?: { [key: string]: Array<string>; };
+    /**
+     * 
+     * @type {{ [key: string]: Array<string>; }}
+     * @memberof Requisites
+     */
+    byFilename?: { [key: string]: Array<string>; };
+    /**
+     * 
+     * @type {{ [key: string]: Array<string>; }}
+     * @memberof Requisites
+     */
+    byExtension?: { [key: string]: Array<string>; };
+    /**
+     * 
+     * @type {{ [key: string]: Array<string>; }}
+     * @memberof Requisites
+     */
+    byTag?: { [key: string]: Array<string>; };
 }
 
 /**
@@ -33,7 +65,16 @@ export function RequisitesFromJSON(json: any): Requisites {
 }
 
 export function RequisitesFromJSONTyped(json: any, ignoreDiscriminator: boolean): Requisites {
-    return json;
+    if (json == null) {
+        return json;
+    }
+    return {
+        
+        'byIndex': json['by_index'] == null ? undefined : json['by_index'],
+        'byFilename': json['by_filename'] == null ? undefined : json['by_filename'],
+        'byExtension': json['by_extension'] == null ? undefined : json['by_extension'],
+        'byTag': json['by_tag'] == null ? undefined : json['by_tag'],
+    };
 }
 
 export function RequisitesToJSON(json: any): Requisites {
@@ -41,6 +82,16 @@ export function RequisitesToJSON(json: any): Requisites {
 }
 
 export function RequisitesToJSONTyped(value?: Requisites | null, ignoreDiscriminator: boolean = false): any {
-    return value;
+    if (value == null) {
+        return value;
+    }
+
+    return {
+        
+        'by_index': value['byIndex'],
+        'by_filename': value['byFilename'],
+        'by_extension': value['byExtension'],
+        'by_tag': value['byTag'],
+    };
 }
 
