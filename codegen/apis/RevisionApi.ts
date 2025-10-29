@@ -205,7 +205,7 @@ export class RevisionApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['requisites'] != null) {
-            formParams.append('requisites', new Blob([JSON.stringify(RequisitesToJSON(requestParameters['requisites']))], { type: "application/json", }));
+            formParams.append('requisites', JSON.stringify(RequisitesToJSON(requestParameters['requisites'])));
                     }
 
         if (requestParameters['comparisons'] != null) {
@@ -217,19 +217,19 @@ export class RevisionApi extends runtime.BaseAPI {
         }
 
         if (requestParameters['promptroles'] != null) {
-            formParams.append('promptroles', new Blob([JSON.stringify(PromptrolesToJSON(requestParameters['promptroles']))], { type: "application/json", }));
+            formParams.append('promptroles', JSON.stringify(PromptrolesToJSON(requestParameters['promptroles'])));
                     }
 
         if (requestParameters['tags'] != null) {
-            formParams.append('tags', new Blob([JSON.stringify(RevisionTagSpecifierToJSON(requestParameters['tags']))], { type: "application/json", }));
+            formParams.append('tags', JSON.stringify(RevisionTagSpecifierToJSON(requestParameters['tags'])));
                     }
 
         if (requestParameters['multimodal'] != null) {
-            formParams.append('multimodal', new Blob([JSON.stringify(MultimodalToJSON(requestParameters['multimodal']))], { type: "application/json", }));
+            formParams.append('multimodal', JSON.stringify(MultimodalToJSON(requestParameters['multimodal'])));
                     }
 
         if (requestParameters['compression'] != null) {
-            formParams.append('compression', new Blob([JSON.stringify(CompressionToJSON(requestParameters['compression']))], { type: "application/json", }));
+            formParams.append('compression', JSON.stringify(CompressionToJSON(requestParameters['compression'])));
                     }
 
 
